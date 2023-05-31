@@ -72,7 +72,7 @@ async function processMessages(messages: any[]) {
     // Store latest message MCI
     await updateLastMci(lastMessageMci);
 
-    console.log(`updated to MCI ${lastMessageMci}`);
+    // console.log(`updated to MCI ${lastMessageMci}`);
   }
 
   return;
