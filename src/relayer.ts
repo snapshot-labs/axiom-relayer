@@ -16,7 +16,7 @@ async function getNextMessages(mci: number) {
   const query = {
     messages: {
       __args: {
-        first: 10,
+        first: 100,
         where: {
           type_in: ['vote', 'proposal'],
           mci_gt: mci
