@@ -24,6 +24,7 @@ async function getNextMessages(mci: number) {
         orderBy: 'mci',
         orderDirection: new EnumType('asc')
       },
+      address: true,
       mci: true,
       id: true,
       ipfs: true,
