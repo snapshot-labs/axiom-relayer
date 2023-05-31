@@ -1,13 +1,15 @@
 import snapshot from '@snapshot-labs/snapshot.js';
 import { EnumType } from 'json-to-graphql-query';
+import redis from './redis';
 
 const hubURL = process.env.HUB_URL || 'https://hub.snapshot.org';
 
-export let lastMci = 29915678;
+export const defaultMci = 29915678;
 
 async function getLastMci() {
-  // @TODO store last MCI
-  return lastMci;
+  const lastMciStr = await redis.get('last_mci');
+
+  return lastMciStr ? Number(lastMciStr) : defaultMci;
 }
 
 async function getNextMessages(mci: number) {
@@ -41,8 +43,7 @@ async function getNextMessages(mci: number) {
 }
 
 async function updateLastMci(mci: number) {
-  // @TODO update last MCI
-  lastMci = mci;
+  await redis.set('last_mci', mci);
 }
 
 async function processMessages(messages: any[]) {
